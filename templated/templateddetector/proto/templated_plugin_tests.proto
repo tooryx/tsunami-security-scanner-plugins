@@ -7,7 +7,7 @@ import "mock_http_server_tests.proto";
 
 option java_multiple_files = true;
 option java_package = "com.google.tsunami.templatedplugin.proto.tests";
-option go_package = "github.com/tooryx/tsunami-security-scanner-plugins/proto/templated_plugin_tests_go_proto";
+option go_package = "github.com/tooryx/tsunami-security-scanner-plugins/templated/templateddetector/proto/templated_plugin_tests_go_proto";
 
 // Defines a set of unit test for a templated plugin.
 message TemplatedPluginTests {
