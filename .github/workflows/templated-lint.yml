@@ -1,0 +1,24 @@
+name: templated-plugins-linter
+
+on:
+  push:
+    paths:
+      - 'templated/**'
+  pull_request:
+    paths:
+      - 'templated/**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: 'Ensure templated plugins are linted correctly'
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v5
+        with:
+          go-version: 1.22
+      - run: |
+          find templated/templateddetector/ -type f \( -name '*.textproto' -a ! -name '*_test.textproto' -a ! -path '*/plugins/examples/*' \) \
+            -exec go run github.com/tooryx/templated-plugins-linter {} \;
+        working-directory: templated/templateddetector/
