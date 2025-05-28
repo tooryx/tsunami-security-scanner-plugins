@@ -19,5 +19,6 @@ jobs:
         with:
           go-version: 1.22
       - run: |
-          find templated/templateddetector/ -type f \( -name '*.textproto' -a ! -name '*_test.textproto' -a ! -path '*/plugins/examples/*' \) \
-            -exec go run github.com/tooryx/templated-plugins-linter {} \;
+          go install github.com/tooryx/templated-plugins-linter@latest \
+          && find templated/templateddetector/ -type f \( -name '*.textproto' -a ! -name '*_test.textproto' -a ! -path '*/plugins/examples/*' \) \
+            -exec templated-plugins-linter {} \;
