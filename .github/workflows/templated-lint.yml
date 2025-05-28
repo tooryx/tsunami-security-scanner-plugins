@@ -21,4 +21,3 @@ jobs:
       - run: |
           find templated/templateddetector/ -type f \( -name '*.textproto' -a ! -name '*_test.textproto' -a ! -path '*/plugins/examples/*' \) \
             -exec go run github.com/tooryx/templated-plugins-linter {} \;
-        working-directory: templated/templateddetector/
