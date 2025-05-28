@@ -7,7 +7,7 @@
 package templated_plugin_go_proto
 
 import (
-	proto "github.com/google/tsunami-security-scanner/proto"
+	go_proto "github.com/tooryx/tsunami-security-scanner/proto/go_proto"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -325,9 +325,9 @@ func (x *PluginConfig) GetDebug() bool {
 type TemplatedPlugin struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Plugin metadata, such as its name, author and description.
-	Info *proto.PluginInfo `protobuf:"bytes,1,opt,name=info,proto3" json:"info,omitempty"`
+	Info *go_proto.PluginInfo `protobuf:"bytes,1,opt,name=info,proto3" json:"info,omitempty"`
 	// Finding that this plugin will report if it finds a vulnerability.
-	Finding *proto.Vulnerability `protobuf:"bytes,2,opt,name=finding,proto3" json:"finding,omitempty"`
+	Finding *go_proto.Vulnerability `protobuf:"bytes,2,opt,name=finding,proto3" json:"finding,omitempty"`
 	// Plugin-level configuration. For example, to enable debug mode.
 	Config *PluginConfig `protobuf:"bytes,3,opt,name=config,proto3" json:"config,omitempty"`
 	// Actions that the plugin can run.
@@ -368,14 +368,14 @@ func (*TemplatedPlugin) Descriptor() ([]byte, []int) {
 	return file_templated_plugin_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *TemplatedPlugin) GetInfo() *proto.PluginInfo {
+func (x *TemplatedPlugin) GetInfo() *go_proto.PluginInfo {
 	if x != nil {
 		return x.Info
 	}
 	return nil
 }
 
-func (x *TemplatedPlugin) GetFinding() *proto.Vulnerability {
+func (x *TemplatedPlugin) GetFinding() *go_proto.Vulnerability {
 	if x != nil {
 		return x.Finding
 	}
@@ -572,8 +572,8 @@ var file_templated_plugin_proto_goTypes = []any{
 	(*HttpAction)(nil),              // 6: tsunami_templated_detector.HttpAction
 	(*CallbackServerAction)(nil),    // 7: tsunami_templated_detector.CallbackServerAction
 	(*UtilityAction)(nil),           // 8: tsunami_templated_detector.UtilityAction
-	(*proto.PluginInfo)(nil),        // 9: tsunami.proto.PluginInfo
-	(*proto.Vulnerability)(nil),     // 10: tsunami.proto.Vulnerability
+	(*go_proto.PluginInfo)(nil),     // 9: tsunami.proto.PluginInfo
+	(*go_proto.Vulnerability)(nil),  // 10: tsunami.proto.Vulnerability
 }
 var file_templated_plugin_proto_depIdxs = []int32{
 	6,  // 0: tsunami_templated_detector.PluginAction.http_request:type_name -> tsunami_templated_detector.HttpAction
