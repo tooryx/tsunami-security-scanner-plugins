@@ -21,4 +21,4 @@ jobs:
       - run: go install github.com/tooryx/templated-plugins-linter@latest
       - run: |
           find templated/templateddetector/ -type f \( -name '*.textproto' -a ! -name '*_test.textproto' -a ! -path '*/plugins/examples/*' \) \
-            -exec templated-plugins-linter {} \;
+          | xargs -I{} templated-plugins-linter {}
