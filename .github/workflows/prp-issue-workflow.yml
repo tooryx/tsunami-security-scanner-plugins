@@ -43,7 +43,7 @@ jobs:
       - name: Compute contributors stats
         run: |
           numMainIssues="$(gh api graphql -F author=$AUTHOR -F owner=$GH_OWNER -F name=$GH_REPO_NAME -f query='
-            query($name: String!, $owner: String!) {
+            query($name: String!, $owner: String!, $author: String!) {
               repository(owner: $owner, name: $name) {
                 issues(states:OPEN, filterBy:{assignee: $author}, labels:["Contributor main"]){
                   totalCount
