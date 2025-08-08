@@ -24,19 +24,18 @@ jobs:
 
                 This means that you can start working on this contribution.
 
-                ❗ Before starting your work, please take a moment to fill
-                the [participation form](https://bughunters.google.com/report/tsunami).
+                ❗ Before starting your work, please take a moment to fill the
+                [participation form](https://bughunters.google.com/report/tsunami)
+                and to read the latest announcements at
+                https://google.github.io/tsunami-security-scanner/
 
-                If you are unsure where to start for writing a Tsunami plugin,
-                we have compiled a set of useful guides in our documentation:
+                If you are unsure where to start, we have compiled a set of
+                useful guides in our documentation:
 
                 📖 https://google.github.io/tsunami-security-scanner/howto/
                 
-                *Unfortunately, our documentation is not yet complete for fingerprints,
-                Python plugins and weak credential detectors. For these, we recommend
-                looking at existing plugins.*
-
-                ❗ Please take a moment to check latest announcements at
-                https://google.github.io/tsunami-security-scanner/.
+                *Unfortunately, our documentation is not yet complete for
+                fingerprints, Python plugins and weak credential detectors. For
+                these, we recommend looking at existing plugins.*
 
                 *~The Tsunami PRP team*

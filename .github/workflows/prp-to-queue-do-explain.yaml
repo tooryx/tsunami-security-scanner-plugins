@@ -20,14 +20,16 @@ jobs:
             GH_REPO: ${{ github.repository }}
             NUMBER: ${{ github.event.issue.number }}
             BODY: |
-                This issue has been put in your contributor queue. This usually means
-                that you already are working on a contribution and the panel is waiting
-                for your other contributions to be fully merged.
+                This issue has been put in your contributor queue. This usually
+                means that you already are working on a contribution and the
+                panel is waiting for your other contributions to be fully
+                merged.
 
-                An issue in your queue is not pre-approved. Any issue that is not
-                explicitely approved by the panel will not be eligible for a reward.
+                An issue in your queue is not pre-approved. Any issue that is
+                not explicitely approved by the panel will not be eligible for
+                a reward.
                 
-                Unless there is an emergency, an issue in your queue cannot be claimed by
-                another contributor.
+                Unless there is an emergency, an issue in your queue cannot be
+                claimed by another contributor.
 
                 *~The Tsunami PRP team*
