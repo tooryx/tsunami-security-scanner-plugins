@@ -37,6 +37,45 @@ jobs:
               work is not eligible for a reward.
 
               *~The Tsunami PRP team*
+      
+      - name: Compute contributors stats
+        run: |
+          numMainIssues="$(gh api graphql -F owner=$GH_OWNER -F name=$GH_REPO_NAME -f query='
+            query($name: String!, $owner: String!) {
+              repository(owner: $owner, name: $name) {
+                issues(states:OPEN, assignee:$AUTHOR, label:"Contributor main"){
+                  totalCount
+                }
+              }
+            }
+          ' --jq '.data.repository.issues.totalCount')"
+          numQueueIssues="$(gh api graphql -F owner=$GH_OWNER -F name=$GH_REPO_NAME -f query='
+            query($name: String!, $owner: String!) {
+              repository(owner: $owner, name: $name) {
+                issues(states:OPEN, assignee:$AUTHOR, label:"Contributor main"){
+                  totalCount
+                }
+              }
+            }
+          ' --jq '.data.repository.issues.totalCount')"
+          echo 'NUM_MAIN_ISSUES='$numMainIssues >> $GITHUB_ENV
+          echo 'NUM_QUEUED_ISSUES='$numQueueIssues >> $GITHUB_ENV
+
+      - name: Post contributor stats
+        run: gh issue comment "$NUMBER" --body "$BODY"
+        env:
+          BODY: |
+              *This message is addressed to the Tsunami panel.*
+
+              ### Contributor stats
+
+              - The contributor has $NUM_MAIN_ISSUES issues tagged as main;
+              - The contributor has $NUM_QUEUED_ISSUES issues tagged as queue.
+
+              ### Useful links
+              
+              - [All open issues from this contributor](https://github.com/google/tsunami-security-scanner-plugins/issues?q=is%3Aissue%20state%3Aopen%20author%$AUTHOR)
+              - [All open PRs from this contributor](https://github.com/google/tsunami-security-scanner-plugins/issues?q=is%3Apr+is%3Aopen+author%$AUTHOR)
 
   on-accepted-post-doc:
     if: github.event.label.name == 'PRP:Accepted'
