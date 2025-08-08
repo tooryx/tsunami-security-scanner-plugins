@@ -24,8 +24,8 @@ jobs:
                 that you already are working on a contribution and the panel is waiting
                 for your other contributions to be fully merged.
 
-                An issue in your queue has not been approved. You should not start work
-                on any issue before the panel informs you that you can do so.
+                An issue in your queue is not pre-approved. Any issue that is not
+                explicitely approved by the panel will not be eligible for a reward.
                 
                 Unless there is an emergency, an issue in your queue cannot be claimed by
                 another contributor.
