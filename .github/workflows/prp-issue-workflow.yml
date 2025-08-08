@@ -41,25 +41,25 @@ jobs:
               *~The Tsunami PRP team*
 
       - name: Compute contributors stats
-        run: |
-          findIssueQuery='
+        env:
+          GRAPHQL_QUERY: |
             query($name: String!, $owner: String!, $author: String!, $label: String!) {
-                repository(owner: $owner, name: $name) {
-                  issues(states:OPEN, filterBy:{assignee: $author}, labels:[$label]){
-                    totalCount
-                  }
+              repository(owner: $owner, name: $name) {
+                issues(states:OPEN, filterBy:{assignee: $author}, labels:[$label]){
+                  totalCount
                 }
               }
-          '
+            }
+        run: |
           numMainIssues="$(gh api graphql \
               -F author=$AUTHOR -F owner=$GH_OWNER -F name=$GH_REPO_NAME\
               -F label="Contributor main" \
-              -f query=$findIssueQuery \
+              -f query="$GRAPHQL_QUERY" \
               --jq '.data.repository.issues.totalCount')"
           numQueueIssues="$(gh api graphql \
               -F author=$AUTHOR -F owner=$GH_OWNER -F name=$GH_REPO_NAME\
               -F label="Contributor queue" \
-              -f query=$findIssueQuery \
+              -f query=$GRAPHQL_QUERY \
               --jq '.data.repository.issues.totalCount')"
           echo 'NUM_MAIN_ISSUES='$numMainIssues >> $GITHUB_ENV
           echo 'NUM_QUEUED_ISSUES='$numQueueIssues >> $GITHUB_ENV
