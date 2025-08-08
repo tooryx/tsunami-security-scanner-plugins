@@ -71,13 +71,13 @@ jobs:
 
               ### Contributor stats
 
-              - The contributor has $NUM_MAIN_ISSUES issues tagged as main;
-              - The contributor has $NUM_QUEUED_ISSUES issues tagged as queue.
+              - The contributor has ${{ env.NUM_MAIN_ISSUES }} issues tagged as main;
+              - The contributor has ${{ env.NUM_QUEUED_ISSUES }} issues tagged as queue.
 
               ### Useful links
               
-              - [All open issues from this contributor](https://github.com/google/tsunami-security-scanner-plugins/issues?q=is%3Aissue%20state%3Aopen%20author%$AUTHOR)
-              - [All open PRs from this contributor](https://github.com/google/tsunami-security-scanner-plugins/issues?q=is%3Apr+is%3Aopen+author%$AUTHOR)
+              - [All open issues from this contributor](https://github.com/google/tsunami-security-scanner-plugins/issues?q=is%3Aissue%20state%3Aopen%20author%${{ env.AUTHOR }})
+              - [All open PRs from this contributor](https://github.com/google/tsunami-security-scanner-plugins/issues?q=is%3Apr+is%3Aopen+author%${{ env.AUTHOR }})
 
   on-accepted-post-doc:
     if: github.event.label.name == 'PRP:Accepted'
