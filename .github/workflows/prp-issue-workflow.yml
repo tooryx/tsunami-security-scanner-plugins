@@ -45,32 +45,36 @@ jobs:
     permissions:
       issues: write
 
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_REPO: ${{ github.repository }}
+      NUMBER: ${{ github.event.issue.number }}
+      AUTHOR: ${{ github.event.issue.user.login }}
+
+
     steps:
       - name: Post comment
         run: gh issue comment "$NUMBER" --body "$BODY"
         env:
-            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            GH_REPO: ${{ github.repository }}
-            NUMBER: ${{ github.event.issue.number }}
-            BODY: |
-                Congratulations, your request has been approved! 🎉
+          BODY: |
+              Congratulations, your request has been approved! 🎉
 
-                This means that you can start working on this contribution.
+              This means that you can start working on this contribution.
 
-                ❗ Please take a moment to fill the [participation form](https://bughunters.google.com/report/tsunami)
-                
-                If you are unsure where to start, we have compiled a set of
-                useful guides in our documentation:
+              ❗ Please take a moment to fill the [participation form](https://bughunters.google.com/report/tsunami)
 
-                📖 https://google.github.io/tsunami-security-scanner/howto/
-                
-                *Unfortunately, our documentation is not yet complete for
-                fingerprints, Python plugins and weak credential detectors. For
-                these, we recommend looking at existing plugins.*
+              If you are unsure where to start, we have compiled a set of
+              useful guides in our documentation:
 
-                📢 Read latest announcements on [GitHub pages](https://google.github.io/tsunami-security-scanner/)
+              📖 https://google.github.io/tsunami-security-scanner/howto/
 
-                *~The Tsunami PRP team*
+              *Unfortunately, our documentation is not yet complete for
+              fingerprints, Python plugins and weak credential detectors. For
+              these, we recommend looking at existing plugins.*
+
+              📢 Read latest announcements on [GitHub pages](https://google.github.io/tsunami-security-scanner/)
+
+              *~The Tsunami PRP team*
 
   on-queue-post-explanation:
     if: github.event.label.name == 'Contributor queue'
@@ -79,24 +83,28 @@ jobs:
     permissions:
       issues: write
 
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_REPO: ${{ github.repository }}
+      NUMBER: ${{ github.event.issue.number }}
+      AUTHOR: ${{ github.event.issue.user.login }}
+
     steps:
       - name: Post comment
         run: gh issue comment "$NUMBER" --body "$BODY"
         env:
-            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            GH_REPO: ${{ github.repository }}
-            NUMBER: ${{ github.event.issue.number }}
-            BODY: |
-                This issue has been put in your contributor queue. This usually
-                means that you already are working on a contribution and the
-                panel is waiting for your other contributions to be fully
-                merged.
+          BODY: |
+              This issue has been put in your contributor queue. This usually
+              means that you already are working on a contribution and the
+              panel is waiting for your other contributions to be fully
+              merged.
 
-                An issue in your queue is not pre-approved. Any issue that is
-                not explicitely approved by the panel will not be eligible for
-                a reward.
-                
-                Unless there is an emergency, an issue in your queue cannot be
-                claimed by another contributor.
+              An issue in your queue is not pre-approved. Any issue that is
+              not explicitely approved by the panel will not be eligible for
+              a reward.
 
-                *~The Tsunami PRP team*
+              Unless there is an emergency, an issue in your queue cannot be
+              claimed by another contributor.
+
+              *~The Tsunami PRP team*
+  
