@@ -59,7 +59,7 @@ jobs:
           numQueueIssues="$(gh api graphql \
               -F author=$AUTHOR -F owner=$GH_OWNER -F name=$GH_REPO_NAME\
               -F label="Contributor queue" \
-              -f query=$GRAPHQL_QUERY \
+              -f query="$GRAPHQL_QUERY" \
               --jq '.data.repository.issues.totalCount')"
           echo 'NUM_MAIN_ISSUES='$numMainIssues >> $GITHUB_ENV
           echo 'NUM_QUEUED_ISSUES='$numQueueIssues >> $GITHUB_ENV
