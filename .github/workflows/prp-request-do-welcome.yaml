@@ -25,7 +25,7 @@ jobs:
       - name: Post comment
         run: gh issue comment "$NUMBER" --body "$BODY"
         env:
-          BODY: >
+          BODY: |
               Welcome to the Tsunami patch reward program!
 
               Your issue has been added to our triage queue and will reviewed shortly. The panel
