@@ -1,0 +1,38 @@
+name: community-plugins-build
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  post-comment:
+    if: github.event.label.name == 'PRP:Request'
+    runs-on: ubuntu-latest
+
+    permissions:
+      issues: write
+
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_REPO: ${{ github.repository }}
+      NUMBER: ${{ github.event.issue.number }}
+      AUTHOR: ${{ github.event.issue.user.login }}
+
+    steps:
+      - name: Assign to author
+        run: gh issue edit --add-assignee "$AUTHOR"
+
+      - name: Post comment
+        run: gh issue comment "$NUMBER" --body "$BODY"
+        env:
+          BODY: >
+              Welcome to the Tsunami patch reward program!
+
+              Your issue has been added to our triage queue and will reviewed shortly. The panel
+              usually takes a decision once per week, so it can take up to a week before you hear
+              back from us.
+
+              Please, do not start the work until the panel has reached a decision. Although we always
+              welcome contributions, unapproved work is not eligible for a reward.
+
+              *~The Tsunami PRP team*

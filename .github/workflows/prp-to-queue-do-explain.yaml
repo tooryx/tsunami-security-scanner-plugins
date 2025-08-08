@@ -1,0 +1,33 @@
+name: community-plugins-build
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  post-comment:
+    if: github.event.label.name == 'Contributor queue'
+    runs-on: ubuntu-latest
+
+    permissions:
+      issues: write
+
+    steps:
+      - name: Post comment
+        run: gh issue comment "$NUMBER" --body "$BODY"
+        env:
+            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            GH_REPO: ${{ github.repository }}
+            NUMBER: ${{ github.event.issue.number }}
+            BODY: >
+                This issue has been put in your contributor queue. This usually means
+                that you already are working on a contribution and the panel is waiting
+                for your other contributions to be fully merged.
+
+                An issue in your queue has not been approved. You should not start work
+                on any issue before the label informs you that you can do so.
+                
+                Unless there is an emergency, an issue in your queue cannot be claimed by
+                another contributor.
+
+                *~The Tsunami PRP team*

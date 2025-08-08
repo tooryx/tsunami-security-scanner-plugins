@@ -1,0 +1,42 @@
+name: community-plugins-build
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  post-comment:
+    if: github.event.label.name == 'PRP:Accepted'
+    runs-on: ubuntu-latest
+
+    permissions:
+      issues: write
+
+    steps:
+      - name: Post comment
+        run: gh issue comment "$NUMBER" --body "$BODY"
+        env:
+            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            GH_REPO: ${{ github.repository }}
+            NUMBER: ${{ github.event.issue.number }}
+            BODY: >
+                Congratulations, your request has been approved! 🎉
+
+                This means that you can start working on this contribution.
+
+                Before starting your work, please take a moment to fill the [participation form](https://bughunters.google.com/report/tsunami).
+                Note that we need this form to release the reward.
+
+                If you are unsure where to start for writing a Tsunami plugin,
+                we can recommend the following articles in our documentation:
+
+                  - [Building and running Tsunami](https://google.github.io/tsunami-security-scanner/howto/howto)
+                  - [Writing a templated plugin](https://google.github.io/tsunami-security-scanner/howto/new-detector/templated/00-getting-started)
+                  - *(Only if the panel explicitely approved it)* [Writing a Java plugin](https://google.github.io/tsunami-security-scanner/howto/new-detector/new-detector-java)
+                
+                Unfortunately, our documentation is not yet complete for fingerprints, Python plugins and weak credential detectors.
+
+                Also take a moment to see the latest announcements on https://google.github.io/tsunami-security-scanner/ as it might
+                affect your contributions.
+
+                *~The Tsunami PRP team*
