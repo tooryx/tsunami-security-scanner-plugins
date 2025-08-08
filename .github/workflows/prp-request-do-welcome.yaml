@@ -20,7 +20,7 @@ jobs:
 
     steps:
       - name: Assign to author
-        run: gh issue edit --add-assignee "$AUTHOR"
+        run: gh issue edit "$NUMBER" --add-assignee "$AUTHOR"
 
       - name: Post comment
         run: gh issue comment "$NUMBER" --body "$BODY"
