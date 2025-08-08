@@ -39,27 +39,28 @@ jobs:
               work is not eligible for a reward.
 
               *~The Tsunami PRP team*
-      
+
       - name: Compute contributors stats
         run: |
-          numMainIssues="$(gh api graphql -F author=$AUTHOR -F owner=$GH_OWNER -F name=$GH_REPO_NAME -f query='
-            query($name: String!, $owner: String!, $author: String!) {
-              repository(owner: $owner, name: $name) {
-                issues(states:OPEN, filterBy:{assignee: $author}, labels:["Contributor main"]){
-                  totalCount
+          findIssueQuery='
+            query($name: String!, $owner: String!, $author: String!, $label: String!) {
+                repository(owner: $owner, name: $name) {
+                  issues(states:OPEN, filterBy:{assignee: $author}, labels:[$label]){
+                    totalCount
+                  }
                 }
               }
-            }
-          ' --jq '.data.repository.issues.totalCount')"
-          numQueueIssues="$(gh api graphql -F author=$AUTHOR -F owner=$GH_OWNER -F name=$GH_REPO_NAME -f query='
-            query($name: String!, $owner: String!, $author: String!) {
-              repository(owner: $owner, name: $name) {
-                issues(states:OPEN, filterBy:{assignee: $author}, labels:["Contributor queue"]){
-                  totalCount
-                }
-              }
-            }
-          ' --jq '.data.repository.issues.totalCount')"
+          '
+          numMainIssues="$(gh api graphql \
+              -F author=$AUTHOR -F owner=$GH_OWNER -F name=$GH_REPO_NAME\
+              -F label="Contributor main" \
+              -f query=$findIssueQuery \
+              --jq '.data.repository.issues.totalCount')"
+          numQueueIssues="$(gh api graphql \
+              -F author=$AUTHOR -F owner=$GH_OWNER -F name=$GH_REPO_NAME\
+              -F label="Contributor queue" \
+              -f query=$findIssueQuery \
+              --jq '.data.repository.issues.totalCount')"
           echo 'NUM_MAIN_ISSUES='$numMainIssues >> $GITHUB_ENV
           echo 'NUM_QUEUED_ISSUES='$numQueueIssues >> $GITHUB_ENV
 
@@ -75,7 +76,7 @@ jobs:
               - The contributor has [${{ env.NUM_QUEUED_ISSUES }} issues](https://github.com/${{ env.GH_REPO }}/issues?q=is%3Aissue%20state%3Aopen%20author%3A${{ env.AUTHOR }}%20label%3A%22Contributor%20queue%22) tagged as queue.
 
               ### Useful links
-              
+
               - [All open issues from this contributor](https://github.com/${{ env.GH_REPO }}/issues?q=is%3Aissue%20state%3Aopen%20author%3A${{ env.AUTHOR }})
               - [All open PRs from this contributor](https://github.com/${{ env.GH_REPO }}/issues?q=is%3Apr+is%3Aopen+author%3A${{ env.AUTHOR }})
 
@@ -148,4 +149,3 @@ jobs:
               claimed by another contributor.
 
               *~The Tsunami PRP team*
-  
