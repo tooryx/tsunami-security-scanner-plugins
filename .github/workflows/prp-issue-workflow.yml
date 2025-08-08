@@ -76,8 +76,8 @@ jobs:
 
               ### Useful links
               
-              - [All open issues from this contributor](https://github.com/google/tsunami-security-scanner-plugins/issues?q=is%3Aissue%20state%3Aopen%20author%${{ env.AUTHOR }})
-              - [All open PRs from this contributor](https://github.com/google/tsunami-security-scanner-plugins/issues?q=is%3Apr+is%3Aopen+author%${{ env.AUTHOR }})
+              - [All open issues from this contributor](https://github.com/google/tsunami-security-scanner-plugins/issues?q=is%3Aissue%20state%3Aopen%20author%3A${{ env.AUTHOR }})
+              - [All open PRs from this contributor](https://github.com/google/tsunami-security-scanner-plugins/issues?q=is%3Apr+is%3Aopen+author%3A${{ env.AUTHOR }})
 
   on-accepted-post-doc:
     if: github.event.label.name == 'PRP:Accepted'
