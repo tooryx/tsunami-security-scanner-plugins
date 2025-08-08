@@ -1,4 +1,4 @@
-name: community-plugins-build
+name: prp-to-queue-do-explain
 
 on:
   issues:

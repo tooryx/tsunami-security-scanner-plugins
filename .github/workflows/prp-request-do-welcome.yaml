@@ -1,4 +1,4 @@
-name: community-plugins-build
+name: prp-request-do-welcome
 
 on:
   issues:
