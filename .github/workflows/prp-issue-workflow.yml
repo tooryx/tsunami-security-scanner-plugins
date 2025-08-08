@@ -43,7 +43,7 @@ jobs:
           numMainIssues="$(gh api graphql -F owner=$GH_OWNER -F name=$GH_REPO_NAME -f query='
             query($name: String!, $owner: String!) {
               repository(owner: $owner, name: $name) {
-                issues(states:OPEN, assignees:$AUTHOR, labels:"Contributor main"){
+                issues(states:OPEN, filterBy:{assignee: "$AUTHOR"}, labels:["Contributor main"]){
                   totalCount
                 }
               }
@@ -52,7 +52,7 @@ jobs:
           numQueueIssues="$(gh api graphql -F owner=$GH_OWNER -F name=$GH_REPO_NAME -f query='
             query($name: String!, $owner: String!) {
               repository(owner: $owner, name: $name) {
-                issues(states:OPEN, assignees:$AUTHOR, labels:"Contributor main"){
+                issues(states:OPEN, filterBy:{assignee: "$AUTHOR"}, labels:[]"Contributor queue"]){
                   totalCount
                 }
               }
