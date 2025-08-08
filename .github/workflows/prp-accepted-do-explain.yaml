@@ -19,7 +19,7 @@ jobs:
             GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             GH_REPO: ${{ github.repository }}
             NUMBER: ${{ github.event.issue.number }}
-            BODY: >
+            BODY: |
                 Congratulations, your request has been approved! 🎉
 
                 This means that you can start working on this contribution.

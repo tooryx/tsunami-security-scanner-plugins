@@ -19,7 +19,7 @@ jobs:
             GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             GH_REPO: ${{ github.repository }}
             NUMBER: ${{ github.event.issue.number }}
-            BODY: >
+            BODY: |
                 This issue has been put in your contributor queue. This usually means
                 that you already are working on a contribution and the panel is waiting
                 for your other contributions to be fully merged.
